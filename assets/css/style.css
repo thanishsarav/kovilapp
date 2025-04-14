@@ -356,13 +356,13 @@ h1, .h1 {
   font-size: 36px; }
 
 h2, .h2 {
-  font-size: 30px; }
+  font-size: 90px; }
 
 h3, .h3 {
   font-size: 24px; }
 
 h4, .h4 {
-  font-size: 18px; }
+  font-size: 28px; }
 
 h5, .h5 {
   font-size: 16px; }
@@ -520,7 +520,7 @@ pre {
 .container-fluid {
   width: 100%;
   padding-right: 15px;
-  padding-left: 15px;
+  padding-left: 0;
   margin-right: auto;
   margin-left: auto; }
 

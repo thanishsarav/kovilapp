@@ -44,7 +44,7 @@ background-image: linear-gradient(to right, #435f6f 0%, #567a8f 50%, #567a8f 100
                 <!-- Form -->
                 <div class="row">
                     <div class="col-12">
-                        <form class="form-horizontal m-t-20" id="loginform" action="dashboard.html">
+                        <form class="form-horizontal m-t-20" id="loginform" action="dashboard.php">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><i

@@ -622,7 +622,7 @@
                                         <label>Remark</label>
                                         <textarea class="form-control" rows="4"></textarea>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group ">
                                         <label for="uname" class="col-sm-2 control-label">Kattalai</label>
                                         <div class="col-sm-8">
                                             <select class="form-control custom-select"
@@ -644,7 +644,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group ">
                                         <label for="uname" class="col-sm-2 control-label">Kattalai
                                             village</label>
                                         <div class="col-sm-8">
@@ -655,7 +655,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group ">
                                         <label for="uname" class="col-sm-2 control-label">Pudavai</label>
                                         <div class="col-sm-8">
                                             <div class="input-group">
@@ -665,7 +665,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group ">
                                         <label for="uname" class="col-sm-2 control-label">IC</label>
                                         <div class="col-sm-8">
                                             <select class="form-control custom-select"
@@ -676,27 +676,33 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="box-footer">
-                                        <button type="submit" class="btn btn-info pull-right">Submit</button>
-                                    </div>
+
                                 </form>
                             </div>
                         </div>
                     </div>
                     <hr>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-info pull-left">Submit</button>
+                        <button type="submit" class="btn btn-info pull-left">Cancel</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div> <!-- Sales chart -->
-    <!-- ============================================================== -->
+    </div>
 
-    <!-- Sales chart -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Email campaign chart -->
 
-    <!-- Recent comment and chats -->
-    <!-- ============================================================== -->
+    </form>
+</div>
+</div>
+</div>
+<!-- Sales chart -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Email campaign chart -->
+
+<!-- Recent comment and chats -->
+<!-- ============================================================== -->
 </div>
 <!-- ============================================================== -->
 <!-- End Page wrapper  -->

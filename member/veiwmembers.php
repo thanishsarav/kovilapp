@@ -9,7 +9,7 @@
         </div>
         <div class="col-7 align-self-center">
             <div class="d-flex align-items-center justify-content-end">
-                <h2 class="page-title">எம்.பி. செல்லப்பன் குடும்பம்</h2>
+                <h2 class="page-title text-info ">எம்.பி. செல்லப்பன் குடும்பம்</h2>
             </div>
             <hr>
         </div>
@@ -24,9 +24,10 @@
         <!-- -------------------- card--------------- -->
 
         <div class=" col-xlg-900 col-md-12 col-sm-12">
+            <a href="javascript:void(0)" class="service-panel-toggle"></a>
             <div class="card">
                 <!-- ----------------------tabs--------------------- -->
-                <ul class="nav nav-pills custom-pills" id="pills-tab" role="tablist">
+                <ul class="nav customizer-tab" id="pills-tab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="pills-timeline-tab" data-toggle="pill" href="#profile" role="tab"
                             aria-controls="pills-timeline" aria-selected="true">Profile</a>
@@ -48,7 +49,7 @@
                         <div class="card-body">
                             <!-- ---------------------husband-------------- -->
                             <div class="col-md-7 col-sm-12">
-                                <div class="card  card-hover">
+                                <div class="card ">
                                     <div class="card-header bg-primary">
                                         <h4 class="m-b-0 text-white">Husband</h4>
                                     </div>
@@ -56,7 +57,8 @@
                                         <div class="container-fluid">
                                             <div class="col-sm-4">
                                                 <h3 class="card-title">Photo</h3>
-                                                <img src="../profile.webp" class="img-thumbnail" width="80px"><br><br>
+                                                <img src="../image/profile.webp" class="img-thumbnail"
+                                                    width="80px"><br><br>
                                                 <div class="button-group" width="80px">
                                                     <button type="button"
                                                         class="btn waves-effect waves-light btn-primary">Upload+</button>
@@ -117,7 +119,7 @@
                             </div>
                             <!-- -------------------------------address------------- -->
                             <div class="col-md-3 col-sm-12">
-                                <div class="card  card-hover">
+                                <div class="card ">
                                     <div class="card-header bg-primary">
                                         <h4 class="m-b-0 text-white">Address</h4>
                                     </div>
@@ -150,15 +152,16 @@
                             </div>
                             <!-- -------------wife-------- -->
                             <div class="col-md-7 col-sm-12">
-                                <div class="card  card-hover">
+                                <div class="card ">
                                     <div class="card-header bg-primary">
                                         <h4 class="m-b-0 text-white">Wife</h4>
                                     </div>
                                     <div class="card-body">
                                         <div class="container-fluid">
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-4 col-md-7 ">
                                                 <h3 class="card-title">Photo</h3>
-                                                <img src="../profile.webp" class="img-thumbnail" width="80px"><br><br>
+                                                <img src="../image/profile.webp" class="img-thumbnail"
+                                                    width="80px"><br><br>
                                                 <div class="button-group" width="80px">
                                                     <button type="button"
                                                         class="btn waves-effect waves-light btn-primary">Upload+</button>
@@ -166,7 +169,7 @@
                                                         class="btn waves-effect waves-light btn-primary">Delete-</button>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="col-lg-12 col-md-5 col-sm-8">
 
                                                 <div class="table-responsive">
                                                     <table class="table">
@@ -219,7 +222,7 @@
                             </div>
                             <!-- ----------------member--------------- -->
                             <div class="col-md-3 col-sm-12">
-                                <div class="card  card-hover">
+                                <div class="card  ">
                                     <div class="card-header bg-primary">
                                         <h4 class="m-b-0 text-white">Members</h4>
                                     </div>
@@ -249,7 +252,7 @@
                             <!-- ----------------children----------------- -->
                             <br>
                             <div class="col-md-7 col-sm-12">
-                                <div class="card  card-hover">
+                                <div class="card ">
                                     <div class="card-header bg-primary">
                                         <h4 class="m-b-0 text-white">childrens</h4>
                                     </div>
@@ -257,7 +260,7 @@
                                         <div class="container-fluid">
 
                                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <div class="card card-hover">
+                                                <div class="card ">
                                                     <div class="card-header bg-primary">
                                                         <h4 class="m-b-0 text-white">Kavin</h4>
                                                     </div>
@@ -265,7 +268,7 @@
                                                         <div class="container-fluid">
                                                             <div class="col-sm-4">
                                                                 <h3 class="card-title">Photo</h3>
-                                                                <img src="../profile.webp" class="img-thumbnail"
+                                                                <img src="../image/profile.webp" class="img-thumbnail"
                                                                     width="80px"><br><br>
                                                                 <div class="button-group" width="80px">
                                                                     <button type="button"
@@ -395,21 +398,24 @@
                                         <div class="row">
                                             <div class="button-group">
                                                 <button type="button"
-                                                    class="btn waves-effect waves-light btn-rounded btn-danger">
-                                                    Upload application+</button>
+                                                    class="btn waves-effect waves-light btn-rounded btn-danger"><a href="applicationupload.php" >
+                                                        Upload application+</a>
+                                                </button>
                                                 <button type="button"
-                                                    class="btn waves-effect waves-light btn-rounded btn-info">
-                                                    Add
-                                                    Son+</button><br>
+                                                    class="btn waves-effect waves-light btn-rounded btn-info"
+                                                    >
+                                                    <a href="addson.php">Add
+                                                        Son+</a></button><br>
                                                 <button type="button"
                                                     class="btn waves-effect waves-light btn-rounded btn-success">
-                                                    Add Daughter+</button>
+                                                    <a href="adddaughter.php">Add
+                                                        daughter+</a></button>
                                                 <button type="button"
                                                     class="btn waves-effect waves-light btn-rounded btn-warning">Add
                                                     horoscope+</button>
                                             </div>
                                         </div>
-
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -419,6 +425,7 @@
                     <div class="tab-pane fade show active col-md-12" id="horoscope" role="tabpanel"
                         aria-labelledby="pills-timeline-tab">
                         <div class="card-body">
+                            -----------------------
                         </div>
                     </div>
 
@@ -445,60 +452,7 @@
                                             <td>கவின்</td>
                                             <td>12.12.2012</td>
                                         </tr>
-                                        <tr>
-                                            <td>1234</td>
-                                            <td>$4500</td>
-                                            <td>கவின்</td>
-                                            <td>12.12.2012</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1234</td>
-                                            <td>$4500</td>
-                                            <td>கவின்</td>
-                                            <td>12.12.2012</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1234</td>
-                                            <td>$4500</td>
-                                            <td>கவின்</td>
-                                            <td>12.12.2012</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1234</td>
-                                            <td>$4500</td>
-                                            <td>கவின்</td>
-                                            <td>12.12.2012</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1234</td>
-                                            <td>$4500</td>
-                                            <td>கவின்</td>
-                                            <td>12.12.2012</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1234</td>
-                                            <td>$4500</td>
-                                            <td>கவின்</td>
-                                            <td>12.12.2012</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1234</td>
-                                            <td>$4500</td>
-                                            <td>கவின்</td>
-                                            <td>12.12.2012</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1234</td>
-                                            <td>$4500</td>
-                                            <td>கவின்</td>
-                                            <td>12.12.2012</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1234</td>
-                                            <td>$4500</td>
-                                            <td>கவின்</td>
-                                            <td>12.12.2012</td>
-                                        </tr>
+
                                     </tbody>
 
                                 </table>

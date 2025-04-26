@@ -37,9 +37,7 @@
                                             <td>administrator</td>
                                             <td>1</td>
                                             <td>senthil.nkkl@gmail.com</td>
-                                            <td><i></i>
-                                                <i></i>
-                                                <i></i>
+                                            <td> <h4> <i class="ti-trash"></i></h4><h4> <i class="ti-pencil-alt"></i></h4><h4 > <i class="ti-eye"></i></h4>
                                             </td>
                                         </tr>
                                         <tr>
@@ -47,9 +45,7 @@
                                             <td>administrator</td>
                                             <td>1</td>
                                             <td>senthil.nkkl@gmail.com</td>
-                                            <td><i></i>
-                                                <i></i>
-                                                <i></i>
+                                            <td> <h4> <i class="ti-trash"></i></h4><h4><a  href="updateuser.php"  ><i class="ti-pencil-alt"></i></a></h4><h4 > <a  href="viewuser.php"  ><i class="ti-eye"></i></a></h4>
                                             </td>
                                         </tr>
                                     </tbody>

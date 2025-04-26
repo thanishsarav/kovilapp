@@ -150,7 +150,7 @@
                             <tbody>
                                 <tr>
                                     <td>---</td>
-                                    <td><img src="../profile.webp" class="img-thumbnail" width="100px">
+                                    <td><img src="../image/profile.webp" class="img-thumbnail" width="100px">
                                     </td>
                                     <td>மைகல்</td>
                                     <td>ப்ருகி</td>
@@ -161,7 +161,7 @@
                                 </tr>
                                 <tr>
                                     <td>---</td>
-                                    <td><img src="../profile.webp" class="img-thumbnail" width="100px">
+                                    <td><img src="../image/profile.webp" class="img-thumbnail" width="100px">
                                     </td>
                                     <td>மைகல்</td>
                                     <td>ப்ருகி</td>
@@ -172,7 +172,7 @@
                                 </tr>
                                 <tr>
                                     <td>---</td>
-                                    <td><img src="../profile.webp" class="img-thumbnail" width="100px">
+                                    <td><img src="../image/profile.webp" class="img-thumbnail" width="100px">
                                     </td>
                                     <td>மைகல்</td>
                                     <td>ப்ருகி</td>
@@ -183,7 +183,7 @@
                                 </tr>
                                 <tr>
                                     <td>---</td>
-                                    <td><img src="../profile.webp" class="img-thumbnail" width="100px">
+                                    <td><img src="../image/profile.webp" class="img-thumbnail" width="100px">
                                     </td>
                                     <td>மைகல்</td>
                                     <td>ப்ருகி</td>
@@ -194,7 +194,7 @@
                                 </tr>
                                 <tr>
                                     <td>---</td>
-                                    <td><img src="../profile.webp" class="img-thumbnail" width="100px">
+                                    <td><img src="../image/profile.webp" class="img-thumbnail" width="100px">
                                     </td>
                                     <td>மைகல்</td>
                                     <td>ப்ருகி</td>
@@ -205,7 +205,7 @@
                                 </tr>
                                 <tr>
                                     <td>---</td>
-                                    <td><img src="../profile.webp" class="img-thumbnail" width="100px">
+                                    <td><img src="../image/profile.webp" class="img-thumbnail" width="100px">
                                     </td>
                                     <td>மைகல்</td>
                                     <td>ப்ருகி</td>
@@ -214,50 +214,7 @@
                                     <td>எருமப்பட்டி</td>
                                     <td>ரமேஸ்</td>
                                 </tr>
-                                <tr>
-                                    <td>---</td>
-                                    <td><img src="../profile.webp" class="img-thumbnail" width="100px">
-                                    </td>
-                                    <td>மைகல்</td>
-                                    <td>ப்ருகி</td>
-                                    <td>கவின்</td>
-                                    <td>4343455678</td>
-                                    <td>எருமப்பட்டி</td>
-                                    <td>ரமேஸ்</td>
-                                </tr>
-                                <tr>
-                                    <td>---</td>
-                                    <td><img src="../profile.webp" class="img-thumbnail" width="100px">
-                                    </td>
-                                    <td>மைகல்</td>
-                                    <td>ப்ருகி</td>
-                                    <td>கவின்</td>
-                                    <td>4343455678</td>
-                                    <td>எருமப்பட்டி</td>
-                                    <td>ரமேஸ்</td>
-                                </tr>
-                                <tr>
-                                    <td>---</td>
-                                    <td><img src="../profile.webp" class="img-thumbnail" width="100px">
-                                    </td>
-                                    <td>மைகல்</td>
-                                    <td>ப்ருகி</td>
-                                    <td>கவின்</td>
-                                    <td>4343455678</td>
-                                    <td>எருமப்பட்டி</td>
-                                    <td>ரமேஸ்</td>
-                                </tr>
-                                <tr>
-                                    <td>---</td>
-                                    <td><img src="../profile.webp" class="img-thumbnail" width="100px">
-                                    </td>
-                                    <td>மைகல்</td>
-                                    <td>ப்ருகி</td>
-                                    <td>கவின்</td>
-                                    <td>4343455678</td>
-                                    <td>எருமப்பட்டி</td>
-                                    <td>ரமேஸ்</td>
-                                </tr>
+                               
                             </tbody>
 
                         </table>

@@ -1,3 +1,5 @@
+
+<div class="chat-windows"></div><footer class=" footer text-center" >Copyright © 2014-2016 sri kakkaveri annamar. All rights reserved.<i class="fa fa-spin fa-cog"></i></footer>
 <script src="<?php echo $path ?>/assets/libs/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="<?php echo $path ?>/assets/libs/popper.js/dist/umd/popper.min.js"></script>

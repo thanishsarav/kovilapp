@@ -41,51 +41,44 @@ include('init.php');
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper">
-        <div class="card" style="margin-bottom:0px" >
-            <div class="card header" style="text-align: center;padding: 0px;background-color:skyblue;margin-bottom:0px"  >
+        <div class="card" style="margin-bottom:0;color:white">
+            <div class="card header" style="text-align: center;padding: 0px;background-color:#095A51;margin-bottom:0px;color:white;text-shadow:2px 2px blue;">
                 <h1>Kakaveri Annammar Trust</h1>
+                
             </div>
-            <div class="card body" >
+            
+            <div class="card body" style="background-color:#095A51;color:white">
 
-                <header class="topbar" style="padding-left:45px;padding-bottom:50px;">
+                <header class="topbar" style="padding-left:45px;padding-bottom:70px;position:relative;background-color:#095A51;color:white">
                     <nav class="navbar top-navbar navbar-expand-md navbar-light">
 
                         <!-- ============================================================== -->
                         <!-- End Logo -->
                         <!-- ============================================================== -->
-                        <div class="navbar" id="navbarSupportedContent" style="" >
-                            <!-- ============================================================== -->
-                            <!-- toggle and nav items -->
-                            <!-- ============================================================== -->
-                            <ul class="navbar-nav float-left " style="padding-left:5px;padding-bottom:10px">
-                                <div class="nav-item dropdown" style="padding-left:0px;">
-                                    <!-- Message -->
-                                    <a class="nav-link dropdown-toggle waves-effect waves-dark"
-                                        href="<?php echo $path ?>/dashboard.php" id="2" 
-                                        aria-haspopup="true">
-                                        <p>Dashboard</p><!--  <i class="font-22 mdi mdi-email-outline"></i> -->
+                        <div class="navbar" id="navbarSupportedContent" style="">
+                            
+                            <ul class="navbar-nav float-left " style="padding-left:0px;padding-bottom:30px;color:white">
+                                <div class="nav-item dropdown" style="padding-left:0px;color:white">
+                                 
+                                    <a class="nav-link dropdown-toggle text-light"
+                                        href="<?php echo $path ?>/dashboard.php" id="2" aria-haspopup="true">
+                                       <p>  Dashboard</p>
 
                                     </a>
 
 
                                 </div>
-                                <li class="nav-item dropdown" style="padding-left:45px;">
-                                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2"
+                                <li class="nav-item dropdown" style="padding-left:25px;">
+                                    <a class="nav-link dropdown-toggle text-light" href="" id="2"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <p>Family</p><!--  <i class="font-22 mdi mdi-email-outline"></i> -->
 
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown"
-                                        aria-labelledby="0">
-                                        <span class="with-arrow">
-                                            <span class="bg-danger"></span>
-                                        </span>
+                                    <div class="dropdown-menu dropdown-menu-left mailbox"
+                                        aria-labelledby="0" style="max-height: 84px !important;border:2px inset #095A51" >
+                                       
                                         <ul class="list-style-none">
-                                            <li>
-                                                <div class="drop-title text-white bg-danger">
-                                                    <h4 class="m-b-0 m-t-5">Family</h4>
-                                                </div>
-                                            </li>
+                                           
                                             <li>
                                                 <div class="message-center message-body">
                                                     <!-- Message -->
@@ -113,23 +106,17 @@ include('init.php');
                                         </ul>
                                     </div>
                                 </li>
-                                <li class="nav-item dropdown" style="padding-left:35px;">
-                                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2"
+                                <li class="nav-item dropdown" style="padding-left:25px;">
+                                    <a class="nav-link dropdown-toggle text-light" href="" id="2"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <p>User</p><!--  <i class="font-22 mdi mdi-email-outline"></i> -->
 
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown"
-                                        aria-labelledby="0">
-                                        <span class="with-arrow">
-                                            <span class="bg-danger"></span>
-                                        </span>
+                                    <div class="dropdown-menu dropdown-menu-left  mailbox "
+                                        aria-labelledby="0" style="max-height: 84px !important;border:2px inset #095A51" >
+                                       
                                         <ul class="list-style-none">
-                                            <li>
-                                                <div class="drop-title text-white bg-danger">
-                                                    <h4 class="m-b-0 m-t-5">Users</h4>
-                                                </div>
-                                            </li>
+                                            
                                             <li>
                                                 <div class="message-center message-body">
                                                     <!-- Message -->
@@ -157,23 +144,17 @@ include('init.php');
                                         </ul>
                                     </div>
                                 </li>
-                                <li class="nav-item dropdown" style="padding-left:35px;">
-                                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2"
+                                <li class="nav-item dropdown" style="padding-left:25px;">
+                                    <a class="nav-link dropdown-toggle text-light" href="" id="2"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <p>Listed by</p><!--  <i class="font-22 mdi mdi-email-outline"></i> -->
 
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown"
-                                        aria-labelledby="0">
-                                        <span class="with-arrow">
-                                            <span class="bg-danger"></span>
-                                        </span>
-                                        <ul class="list-style-none">
-                                            <li>
-                                                <div class="drop-title text-white bg-danger">
-                                                    <h4 class="m-b-0 m-t-5">Listed by</h4>
-                                                </div>
-                                            </li>
+                                    <div class="dropdown-menu dropdown-menu-left  mailbox "
+                                        aria-labelledby="0" style="max-height: 84px !important;border:2px inset #095A51" >
+                                        
+                                        <ul class="list-style-none" >
+                                           
                                             <li>
                                                 <div class="message-center message-body">
                                                     <!-- Message -->
@@ -201,40 +182,33 @@ include('init.php');
                                         </ul>
                                     </div>
                                 </li>
-                            </ul>
-
-
-                            <!-- ============================================================== -->
-                            <!-- Right side toggle and nav items -->
-                            <!-- ============================================================== -->
-                            <ul class="navbar-nav float-right" style="padding-left:75px;padding-bottom:10px">
-                                <!-- ============================================================== -->
-                                <!-- Messages -->
-                                <!-- ============================================================== -->
-                                <li class="nav-item dropdown" style="padding-left:45px;text-alaign:right">
-                                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <li class="nav-item dropdown" style="padding-left:25px;text-alaign:right">
+                                    <a class="nav-link dropdown-toggle text-light" href="" id="2"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  >
                                         <p>Label</p><!--  <i class="font-22 mdi mdi-email-outline"></i> -->
 
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown"
-                                        aria-labelledby="0">
-                                        <span class="with-arrow">
-                                            <span class="bg-danger"></span>
-                                        </span>
+                                    <div class="dropdown-menu dropdown-menu-left  mailbox "
+                                        aria-labelledby="0" style="max-height: 84px !important;border:2px inset #095A51 " >
+                                        
                                         <ul class="list-style-none">
-                                            <li>
-                                                <div class="drop-title text-white bg-danger">
-                                                    <h4 class="m-b-0 m-t-5">Label</h4>
-                                                </div>
-                                            </li>
+                                           
                                             <li>
                                                 <div class="message-center message-body">
                                                     <!-- Message -->
-                                                    <a href="member/addmembers.php" class="message-item">
+                                                    <a href="<?php echo $path ?>/label/labellist.php"
+                                                        class="message-item">
 
                                                         <div class="mail-contnet">
-                                                            <h5 class="message-title">Label</h5>
+                                                            <h5 class="message-title">List Label</h5>
+
+                                                        </div>
+                                                    </a>
+                                                    <a href="<?php echo $path ?>/label/addlabel.php"
+                                                        class="message-item">
+
+                                                        <div class="mail-contnet">
+                                                            <h5 class="message-title">Add Label</h5>
 
                                                         </div>
                                                     </a>
@@ -247,29 +221,40 @@ include('init.php');
                                         </ul>
                                     </div>
                                 </li>
-                                <li class="nav-item dropdown" style="padding-left:45px;">
-                                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <p>Delete</p>
+                                <li class="nav-item dropdown" style="padding-left:25px;">
+                                    <a class="nav-link dropdown-toggle text-light" href="<?php echo $path ?>/trash.php" id="2"
+                                         aria-haspopup="true" aria-expanded="false">
+                                        <p>Trash</p>
 
                                     </a>
 
                                 </li>
+                            </ul>
 
-                                <li class="nav-item dropdown" style="padding-left:45px;">
-                                    <a class="nav-link dropdown-toggle waves-effect waves-dark pro-pic" href=""
+
+                            <!-- ============================================================== -->
+                            <!-- Right side toggle and nav items -->
+                            <!-- ============================================================== -->
+                            <ul class="navbar-nav float-right" style="padding-left:350px;padding-bottom:30px">
+                                <!-- ============================================================== -->
+                                <!-- Messages -->
+                                <!-- ============================================================== -->
+
+
+                                <li class="nav-item dropdown" style="padding-left:100px;">
+                                    <a class="nav-link dropdown-toggle text-light pro-pic" href=""
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <img src="<?php echo $path ?>/image/profile.webp" alt="user"
                                             class="rounded-circle" width="40">
-                                        <span class="m-l-5 font-medium d-none d-sm-inline-block">User<i
-                                                class="mdi mdi-chevron-down"></i></span>
+                                        <span class="m-l-5 font-medium d-none d-sm-inline-block" style="text-shadow:1px 1px blue;" >User
+                                        </span>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                                    <div class="dropdown-menu dropdown-menu-right user-dd" style="border:2px solid rgb(7, 195, 29)" >
                                         <span class="with-arrow">
-                                            <span class="bg-primary"></span>
+                                            <span class="bg-success"></span>
                                         </span>
                                         <div
-                                            class="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
+                                            class="d-flex no-block align-items-center p-15 bg-success text-white m-b-10">
                                             <div class="">
                                                 <img src="<?php echo $path ?>/image/profile.webp" alt="user"
                                                     class="rounded-circle" width="60">
@@ -285,7 +270,7 @@ include('init.php');
                                             <div class="dropdown-divider"></div>
                                         </div>
                                         <div class="p-l-30 p-10">
-                                            <a href="<?php echo $path ?>user/viewuser.html"
+                                            <a href="<?php echo $path ?>/user/viewuser.php"
                                                 class="btn btn-sm btn-success btn-rounded">View
                                                 User</a>
                                         </div>
@@ -299,4 +284,4 @@ include('init.php');
             </div>
         </div>
 
-        <div class="page-wrapper" style="margin-left:0px;">
+        <div class="page-wrapper" style="margin-left:0.5px;padding-top:10px;">

@@ -1,4 +1,20 @@
-<?php include('../header.php'); ?>
+<?php include('../header.php');
+global $con;
+$sql = "SELECT DISTINCT occupation, count(*) as cnt FROM $tbl_family  WHERE occupation <> ' ' group by occupation ORDER BY occupation ASC";
+$result_occ = mysqli_query($con, $sql);
+
+$counter = 0;
+$occupation = '';
+if (isset($_GET['occupation'])) {
+    $occupation = $_GET['occupation'];
+
+    $sql1 = "SELECT count(*) as cnt FROM $tbl_family WHERE  occupation='$occupation'";
+    $count_res = mysqli_query($con, $sql1);
+    $count = mysqli_fetch_array($count_res);
+    $sql2 = "SELECT * FROM $tbl_family WHERE  occupation='$occupation'";
+    $result = mysqli_query($con, $sql2);
+}
+?>
 
 
 <div class="page-breadcrumb">
@@ -20,20 +36,14 @@
 <!-- ============================================================== -->
 <!-- customizer Panel -->
 <!-- ============================================================== -->
-
-<br>
-<div class="col-sm-20">
-    <div class="row">
+<div id="list" class="col-sm-12">
+    <div class="row" id="list">
 
 
-
-
-
-
-        <div class="box">
+        <div class="box" id="list">
             <div class="box-body">
 
-                <div class="col-sm-11 ">
+                <div class="col-sm-19 ">
                     <div class="card ">
                         <div class="card-header bg-primary  " style="color: rgb(243, 244, 245);">
                             Occupation
@@ -42,115 +52,33 @@
                             <div class="table-responsive">
                                 <table class="table">
                                     <tbody>
-                                        <tr>
-                                            <td>All</td>
+                                        <?php
+                                        if (!$result_occ) {
+                                            echo 'No records found';
+                                        } else {
+                                            echo '<ul id="listby" class="list-group list-group-unbordered">';
+                                            ?>
+                                            <li id="listby" class="list-group-item">
+                                                <b><a href="occupation.php">All</a></b>
+                                            </li>
+                                            <?php
+                                            $active = '';
+                                            while ($row = mysqli_fetch_array($result_occ)) {
+                                                if ($row['occupation'] == $occupation) {
+                                                    $active = ' cls_active ';
+                                                } else {
+                                                    $active = '';
+                                                } ?>
+                                                <li id="listby" class="list-group-item <?php echo $active ?>">
+                                                    <b><a href="occupation.php?occupation=<?php echo $row['occupation'] ?>"><?php echo get_occupation($row['occupation']) ?>
+                                                            (<?php echo $row['cnt'] ?>)</a></b>
+                                                </li>
 
-                                        </tr>
-                                        <tr>
-                                            <td>Agriculture (93)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Business-Transport (14)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Software Engineer (4)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Finance (5)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Poultry (3)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Bank Employee (3)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Lawyer (1)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Government Employee (6)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Teacher (5)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Self Employed (9)</td>
-
-                                        </tr>
-
-                                        <tr>
-                                            <td>Business Grocery (1)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Driver (11)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Labour (5)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Homemaker (1)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Govt School Teacher (2)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td> Milk Vendor (1)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Business Hotel (1)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Police</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Business Hollow Bricks (1)</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>Others (25)</td>
-
-                                        </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                                <?php
+                                            }
+                                            echo '</ul>';
+                                        }
+                                        ?>
 
                                     </tbody>
                                 </table>
@@ -160,148 +88,131 @@
                 </div>
             </div>
         </div>
-        <div class=" col-sm-9 ">
+        <?php if ($occupation) {
+            ?>
+           
+              
+                <div class=" col-sm-10 ">
+                    <div class="card ">
 
-            <div class="card">
-                <div class="card-body">
 
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Photo</th>
-                                    <th>childrens</th>
-                                    <th>Wife name</th>
-                                    <th>Name</th>
-                                    <th>Mobile</th>
-                                    <th>Address</th>
-                                    <th>parents</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>---</td>
-                                    <td><img src="../image/profile.webp" class="img-thumbnail" width="100px">
-                                    </td>
-                                    <td>மைகல்</td>
-                                    <td>ப்ருகி</td>
-                                    <td>கவின்</td>
-                                    <td>4343455678</td>
-                                    <td>எருமப்பட்டி</td>
-                                    <td>ரமேஸ்</td>
-                                </tr>
-                                <tr>
-                                    <td>---</td>
-                                    <td><img src="../image/profile.webp" class="img-thumbnail" width="100px">
-                                    </td>
-                                    <td>மைகல்</td>
-                                    <td>ப்ருகி</td>
-                                    <td>கவின்</td>
-                                    <td>4343455678</td>
-                                    <td>எருமப்பட்டி</td>
-                                    <td>ரமேஸ்</td>
-                                </tr>
-                                <tr>
-                                    <td>---</td>
-                                    <td><img src="../image/profile.webp" class="img-thumbnail" width="100px">
-                                    </td>
-                                    <td>மைகல்</td>
-                                    <td>ப்ருகி</td>
-                                    <td>கவின்</td>
-                                    <td>4343455678</td>
-                                    <td>எருமப்பட்டி</td>
-                                    <td>ரமேஸ்</td>
-                                </tr>
-                                <tr>
-                                    <td>---</td>
-                                    <td><img src="../image/profile.webp" class="img-thumbnail" width="100px">
-                                    </td>
-                                    <td>மைகல்</td>
-                                    <td>ப்ருகி</td>
-                                    <td>கவின்</td>
-                                    <td>4343455678</td>
-                                    <td>எருமப்பட்டி</td>
-                                    <td>ரமேஸ்</td>
-                                </tr>
-                                <tr>
-                                    <td>---</td>
-                                    <td><img src="../image/profile.webp" class="img-thumbnail" width="100px">
-                                    </td>
-                                    <td>மைகல்</td>
-                                    <td>ப்ருகி</td>
-                                    <td>கவின்</td>
-                                    <td>4343455678</td>
-                                    <td>எருமப்பட்டி</td>
-                                    <td>ரமேஸ்</td>
-                                </tr>
-                                <tr>
-                                    <td>---</td>
-                                    <td><img src="../image/profile.webp" class="img-thumbnail" width="100px">
-                                    </td>
-                                    <td>மைகல்</td>
-                                    <td>ப்ருகி</td>
-                                    <td>கவின்</td>
-                                    <td>4343455678</td>
-                                    <td>எருமப்பட்டி</td>
-                                    <td>ரமேஸ்</td>
-                                </tr>
-                                <tr>
-                                    <td>---</td>
-                                    <td><img src="../image/profile.webp" class="img-thumbnail" width="100px">
-                                    </td>
-                                    <td>மைகல்</td>
-                                    <td>ப்ருகி</td>
-                                    <td>கவின்</td>
-                                    <td>4343455678</td>
-                                    <td>எருமப்பட்டி</td>
-                                    <td>ரமேஸ்</td>
-                                </tr>
-                                <tr>
-                                    <td>---</td>
-                                    <td><img src="../image/profile.webp" class="img-thumbnail" width="100px">
-                                    </td>
-                                    <td>மைகல்</td>
-                                    <td>ப்ருகி</td>
-                                    <td>கவின்</td>
-                                    <td>4343455678</td>
-                                    <td>எருமப்பட்டி</td>
-                                    <td>ரமேஸ்</td>
-                                </tr>
-                                <tr>
-                                    <td>---</td>
-                                    <td><img src="../image/profile.webp" class="img-thumbnail" width="100px">
-                                    </td>
-                                    <td>மைகல்</td>
-                                    <td>ப்ருகி</td>
-                                    <td>கவின்</td>
-                                    <td>4343455678</td>
-                                    <td>எருமப்பட்டி</td>
-                                    <td>ரமேஸ்</td>
-                                </tr>
-                                <tr>
-                                    <td>---</td>
-                                    <td><img src="../image/profile.webp" class="img-thumbnail" width="100px">
-                                    </td>
-                                    <td>மைகல்</td>
-                                    <td>ப்ருகி</td>
-                                    <td>கவின்</td>
-                                    <td>4343455678</td>
-                                    <td>எருமப்பட்டி</td>
-                                    <td>ரமேஸ்</td>
-                                </tr>
-                            </tbody>
 
-                        </table>
+                        <div class="card-body">
+
+                            
+                                <div class="table-responsive">
+                                     <caption>
+                    <b>Search Results for <?php echo get_occupation($occupation); ?>
+                        (<?php echo $count['cnt']; ?>)</b>
+                </caption>
+                                    <table class="table table-hover">
+                                       
+                                        <thead>
+                                            <tr>
+                                                <th width="40%">S.no</th>
+                                                <th width="40%">Personal Details</th>
+                                                <th width="80%">Address</th>
+                                                <th width="40%">Occupation </th>
+                                                <th width="40%">Other details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody><?php
+                                        while ($row = mysqli_fetch_array($result)) {
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo ++$counter; ?></td>
+                                                    <td>
+                                                        <a id="a" href="veiwmembers.php?id=<?= $row['id'] ?? '' ?>">
+                                                            <?= $row['name'] ?? '' ?>
+                                                        </a><br>
+                                                        S/O
+                                                        <?= ($row['father_name'] ?? '') . "<br>" . ($row['mother_name'] ?? '') . "<br>" . ($row['mobile_no'] ?? '') ?>
+                                                    </td>
+                                                    <td class="data">
+                                                        <?php echo str_replace(",", ", <br>", $row['permanent_address'] ?? ''); ?>
+                                                    </td>
+                                                    <td><?php echo $row['occupation'] ?? ''; ?></td>
+                                                    <td>
+                                                        <?php
+                                                        echo ($row['education_details'] ?? '') . "<br>";
+                                                        echo isset($row['blood_group']) ? get_blood_group($row['blood_group']) : '' . "<br>";
+                                                        echo $row['pudavai'] ?? '';
+                                                        ?>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                        }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            
+                        </div>
+                    </div>
+                    <?php
+        } else {
+            $sql3 = "SELECT * FROM $tbl_family order by occupation";
+            $result = mysqli_query($con, $sql3);
+            ?>
+
+                    <div class=" col-sm-10 ">
+
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th width="4%">S.no</th>
+                                                <th width="15%">Personal Details</th>
+                                                <th width="20%">Address</th>
+                                                <th width="13%">Occupation </th>
+                                                <th width="17%">Other details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $counter = 0;
+                                            while ($row = mysqli_fetch_array($result)) {
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo ++$counter; ?></td>
+                                                    <td><a id="a" href="veiwmembers.php?id=<?php echo $row['id'] ?> ">
+                                                            <?php echo $row['name'] ?> </a><br> S/O
+                                                        <?php echo $row['father_name'] . "<br>" . $row['mother_name'] . "<br>" . $row['mobile_no'] ?>
+                                                    </td>
+                                                    <td class="data">
+                                                        <?php echo str_replace(",", ", <br>", $row['permanent_address'] ?? ''); ?>
+                                                    </td>
+                                                    <td><?php echo $row['occupation'] ?? ''; ?></td>
+                                                    <td>
+                                                        <?php
+                                                        echo ($row['education_details'] ?? '') . "<br>";
+                                                        echo isset($row['blood_group']) ? get_blood_group($row['blood_group']) : '' . "<br>";
+                                                        echo $row['pudavai'] ?? '';
+                                                        ?>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                            }
+        }
+        ?>
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-
 </div>
-
+</div>
+</div>
 <!-- ============================================================== -->
 <!-- All Jquery -->
 <!-- ============================================================== -->

@@ -1,4 +1,6 @@
-<?php include('../header.php'); ?>
+<?php include('../header.php');
+ $result = get_labels();
+?>
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-5 align-self-center">
@@ -7,9 +9,12 @@
         <div class="col-7 align-self-center">
             <div class="d-flex align-items-center justify-content-end">
                 <nav aria-label="breadcrumb">
-                    <div class="button group ">
-                        <button class="btn btn-primary"  href="<?php echo $path ?>/label/addlabel.php" >Add</button>
-                    </div>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <div><?php echo "<h4><i><b>Total Records:" . count($result). "</b></i></h4>"; ?></div>
+                        </li>
+
+                    </ol>
                 </nav>
             </div>
         </div>
@@ -29,12 +34,12 @@
                             <thead>
                                 <tr>
                                     <th rowspan="2">Display name</th>
-                                    <th rowspan="2">slug</th>
-                                    <th rowspan="2" >type</th>
-                                    <th rowspan="2" >category</th>
-                                    <th rowspan="2">parent id</th>
-                                    <th rowspan="2">order</th>
-                                    <th rowspan="2">Actions</th>
+                                    <th rowspan="2">Slug</th>
+                                    <th rowspan="2" >Type</th>
+                                    <th rowspan="2" >Category</th>
+                                    <th rowspan="2"  >ParentId</th>
+                                    <th rowspan="2">Order</th>
+                                    <th rowspan="2"  >Actions</th>
 
                                 </tr>
                                 <tr>
@@ -42,112 +47,57 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                    <td>Aadai / ஆடை</td>
-                                    <td>adara</td>
-                                    <td>Kootam</td>
-
-                                    <td></td>
-
-                                    <td>0</td>
-                                    <td>9</td>
-                                    <td>
-                                        <h4> <i class="ti-trash"></i></h4>
-                                        <h4> <i class="ti-pencil-alt"></i></h4>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Aadai / ஆடை</td>
-                                    <td>adara</td>
-                                    <td>Kootam</td>
-
-                                    <td></td>
-
-                                    <td>0</td>
-                                    <td>9</td>
-                                    <td>
-                                        <h4> <i class="ti-trash"></i></h4>
-                                        <h4> <i class="ti-pencil-alt"></i></h4>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Aadai / ஆடை</td>
-                                    <td>adara</td>
-                                    <td>Kootam</td>
-
-                                    <td></td>
-
-                                    <td>0</td>
-                                    <td>9</td>
-                                    <td>
-                                        <h4> <i class="ti-trash"></i></h4>
-                                        <h4> <i class="ti-pencil-alt"></i></h4>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Aadai / ஆடை</td>
-                                    <td>adara</td>
-                                    <td>Kootam</td>
-
-                                    <td></td>
-
-                                    <td>0</td>
-                                    <td>9</td>
-                                    <td>
-                                        <h4> <i class="ti-trash"></i></h4>
-                                        <h4> <i class="ti-pencil-alt"></i></h4>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Aadai / ஆடை</td>
-                                    <td>adara</td>
-                                    <td>Kootam</td>
-
-                                    <td></td>
-
-                                    <td>0</td>
-                                    <td>9</td>
-                                    <td>
-                                        <h4> <i class="ti-trash"></i></h4>
-                                        <h4> <i class="ti-pencil-alt"></i></h4>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Aadai / ஆடை</td>
-                                    <td>adara</td>
-                                    <td>Kootam</td>
-
-                                    <td></td>
-
-                                    <td>0</td>
-                                    <td>9</td>
-                                    <td>
-                                        <h4> <i class="ti-trash"></i></h4>
-                                        <h4> <i class="ti-pencil-alt"></i></h4>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Aadai / ஆடை</td>
-                                    <td>adara</td>
-                                    <td>Kootam</td>
-
-                                    <td></td>
-
-                                    <td>0</td>
-                                    <td>9</td>
-                                    <td>
-                                        <h4> <i class="ti-trash"></i></h4>
-                                        <h4> <i class="ti-pencil-alt"></i></h4>
-
-                                    </td>
-                                </tr>
+                                <?php
+                                if($result){
+                                    
+                              foreach($result as $k => $row){
+                                    ?>
+                                    <tr>          
+                                        <td><?php echo $row['display_name'] ?></td>
+                                        <td><?php echo $row['slug'] ?></td>
+                                        <td><?php echo $row['type_name'] ?></td>
+                                        <td><?php echo $row['category'] ?></td>
+                                        <td ><?php echo $row['parent_id'] ?></td>
+                                        <td><?php echo $row['order'] ?></td>
+                                        <td>
+                                       
+                                        
+                                         <a id="a" href="javascript:void(0);"   onclick="updatelabel(<?php echo $row['id'] ?>)" ><span class="m-r-10 mdi mdi-pencil-box-outline" ></span></a> 
+                                         <a href="#" id="a" onclick="deletelabel(<?php echo $row['id'] ?>)"> <span class="fas fa-trash-alt" ></span></a>
+                                        </td>
+                                       
+                                    </tr>
                                
+                                <?php
+                                }}
+                            
+                            ?>
+ <script>
+                                    function deletelabel(id)
+                                    {
+                                        url = "dltlabel.php?id="+id;
+                                        title = "popup";
+                                        var newWindow = window.open(url, title, 'scrollbars=yes, width=800 height=400');
+                                    }
+                                </script> 
+                                <script>
+                                    function addlabel()
+                                    {
+                                        url = "addlabel.php";
+                                        title = "popup";
+                                        var newWindow = window.open(url, title, 'scrollbars=yes, width=800 height=400');
+                                    }
+                                </script> 
+                                <script>
+                                    function updatelabel(id)
+                                    {
+                                        url = "updatelebel.php?id="+id;
+                                        title = "popup";
+                                        var newWindow = window.open(url, title, 'scrollbars=yes, width=800 height=400');
+                                    }
+                                </script> 
+
+
                             </tbody>
 
                         </table>

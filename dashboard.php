@@ -1,4 +1,27 @@
-<?php include('header.php'); ?>
+<?php include('header.php');
+global $con;
+$sql = "SELECT COUNT(*) as total FROM `$tbl_family` where `deleted`=0";
+$result = mysqli_query($con, $sql);
+$row = mysqli_fetch_array($result);
+
+$sql1 = "SELECT COUNT(*) as total FROM `$tbl_child`";
+$result1 = mysqli_query($con, $sql1);
+$row1 = mysqli_fetch_array($result1);
+
+$sql2 = "SELECT COUNT(*) as total FROM `$tbl_child` where `c_marital_status`='No'";
+$result2 = mysqli_query($con, $sql2);
+$row2 = mysqli_fetch_array($result2);
+
+$sql3 = "SELECT COUNT(*) as total FROM `$tbl_child` where `c_marital_status`='No' AND `c_gender`='male'";
+$result3 = mysqli_query($con, $sql3);
+$row3 = mysqli_fetch_array($result3);
+
+$sql4 = "SELECT COUNT(*) as total FROM `$tbl_child` where `c_marital_status`='No' AND `c_gender`='female'";
+$result4 = mysqli_query($con, $sql4);
+$row4 = mysqli_fetch_array($result4);
+
+
+ ?>
 <!-- ============================================================== -->
 <div class="page-breadcrumb">
     <div class="row">
@@ -19,12 +42,7 @@
         </div>
     </div>
 </div>
-<!-- ============================================================== -->
-<!-- End Bread crumb and right sidebar toggle -->
-<!-- ============================================================== -->
-<!-- ============================================================== -->
-<!-- Container fluid  -->
-<!-- ============================================================== -->
+
 <div class="container-fluid">
     <!-- ============================================================== -->
     <!-- Sales chart -->
@@ -39,19 +57,19 @@
                     </div><br>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b> Total Members </b> <span class="pull-right"> </span>
+                            <b> Total Members: </b> <span class="pull-right" style="text-alaign:right" > <?php echo $row['total']; ?></span>
                         </li>
                         <li class="list-group-item">
-                            <b> Total Children </b> <span class="pull-right"> </span>
+                            <b> Total Children: </b> <span class="pull-right"><?php echo $row1['total']; ?> </span>
                         </li>
                         <li class="list-group-item">
-                            <b> Total Unmarried </b> <span class="pull-right"> </span>
+                            <b> Total Unmarried :</b> <span class="pull-right"><?php echo $row2['total']; ?> </span>
                         </li>
                         <li class="list-group-item">
-                            <b> Unmarried Male</b> <span class="pull-right"> </span>
+                            <b> Unmarried Male:</b> <span class="pull-right"><?php echo $row3['total']; ?> </span>
                         </li>
                         <li class="list-group-item">
-                            <b> Unmarried Female</b> <span class="pull-right"> </span>
+                            <b> Unmarried Female:</b> <span class="pull-right"><?php echo $row4['total']; ?> </span>
                         </li>
                     </ul>
                 </div>

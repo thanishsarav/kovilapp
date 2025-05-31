@@ -1,32 +1,41 @@
 <?php
 
-require_once(dirname(__FILE__) . "/config.php");
+require(dirname(__FILE__) . "/config.php");
 
 function check_login() {
     global $path;
-    session_start();
-    //Check whether the session variable username is present or not
-    if (!isset($_SESSION['username']) || (($_SESSION['username']) == '')) {
-        redirect('index.php');
+
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Check whether the session variable 'username' is set and not empty
+    if (empty($_SESSION['username'])) {
+        header("Location: {$path}/login.php");
+        exit(); // Always exit after a redirect
     }
 }
 
 function connectdb() {
 
     global $db_host, $db_name, $db_user, $db_pass, $con;
-
+   
+    
+    
     //connect only if the $con variable is false..  if it is true, it means already connection established
     if ($con == false) {
-        $con = mysqli_connect($db_host, $db_user, $db_pass);
-        // echo 'hi';die;
+
+      $con = new mysqli('localhost', 'root', '', 'kovilnew');
+     
         if (!$con) {
-            die('Could not connect ' . mysqli_error());
+            die('Could not connect ' );
         }
         mysqli_select_db($con, $db_name);
         mysqli_set_charset($con, 'utf8');
     }
     return($con);
 }
+
 
 function getdata($sql) {
     global $con;
@@ -44,9 +53,9 @@ function display_donation($field, $row1) {
 
 function login($username, $password) {
     global $tbl_users, $con;
-
+    // $conn = new mysqli("localhost", "username", "password", "database");
     $sql = "SELECT * FROM `$tbl_users` WHERE username='$username'";
-    // echo $sql;
+  
     $result = mysqli_query($con, $sql);
 
     $row = mysqli_fetch_array($result);
@@ -89,13 +98,20 @@ function get_families($cond = '', $page = '') {
         $family[$row['id']] = $row;
     }
     return $family;
-    var_dump($family);
+    // var_dump($family);
 }
 
 function get_child($child_id) {
     global $con, $tbl_child;
 
     $sql = "SELECT * from $tbl_child where id=$child_id ";
+    $result = mysqli_query($con, $sql);
+    return mysqli_fetch_array($result);
+}
+function get_donation($id) {
+    global $con, $tbl_donetion;
+
+    $sql = "SELECT * from $tbl_donetion where id=$id ";
     $result = mysqli_query($con, $sql);
     return mysqli_fetch_array($result);
 }
@@ -122,11 +138,13 @@ function get_children($father_id = '') {
 
     $result = mysqli_query($con, $sql);
     $children = array();
+ 
     while ($row = mysqli_fetch_array($result)) {
        
         $children[$row['father_id']][$row['id']] = array();
         $children[$row['father_id']][$row['id']] = $row;
     }
+
     return $children;
 }
 
@@ -148,7 +166,7 @@ function add_member($m) {
         $father_name = $m['father_name'];
         $mother_name = $m['mother_name'];
         //  $dob = $m['dob'];
-        $dob = $m['dob']['year'] . "-" . $m['dob']['month'] . "-" . $m['dob']['date'];
+        $dob = $m['dob']['date'] . "-" . $m['dob']['month'] . "-" . $m['dob']['year'];
         //$age = $m['age'];
         $blood_group = $m['blood_group'];
         $qualification = $m['qualification'];
@@ -181,18 +199,17 @@ function add_member($m) {
         $w_temple = $m['w_temple'];
         $w_email = $m['w_email'];
         $ic = $m['ic'];
-        //  $_2000_bk_no = $m['_2000_bk_no'];
-        // $_2000_rc_no = $m['_2000_rc_no'];
+
         $remarks = $m['remarks'];
         $pincode = $m['pincode'];
         $c_pincode = $m['c_pincode'];
         $state = $m['state'];
         $c_state = $m['c_state'];
-        // $admin_notes = $m['admin_notes'];
-        // $member_name = $m['member_name'];
+
         $join_date = date('d-m-Y H:i:s');
         $created_date = date('d-m-Y H:i:s');
-        $created_by = $_SESSION['ID'];
+   $created_by = $_SESSION['ID'] ?? null;
+
 
         // $fam_id=$m['fam_id'];
         $sql = "INSERT INTO `$tbl_family`(`name`,`father_name`, `mother_name`,`dob`, `blood_group`, `qualification`,  `occupation`, `email`, `pudavai`, `mobile_no`, `permanent_address`, `current_address`, `village`, `district`, `country`,`taluk`, `c_village`, `c_district`, `c_country`,`c_taluk`, `kattalai`,`k_village`, `w_name`, `w_dob`, `w_blood_group`, `w_qualification`,`w_occupation`, `w_kootam`, `w_temple`, `w_email`, `created_by`, `created_date`, `occupation_details`, `education_details`, `w_education_details`, `w_occupation_details`,`pincode`,`state`,`c_pincode`,`c_state`,`ic`)"
@@ -222,26 +239,6 @@ function get_member($id) {
     return $row;
 }
 
-function get_donation($id = '', $type = '') {
-    global $con, $tbl_donation;
-
-    $where = "1=1";
-    if ($id)
-        $where .= ' and member_id = ' . $id;
-
-    if ($type)
-        $where .= " and type='$type'";
-
-    $sql = "SELECT * FROM `$tbl_donation` WHERE $where ";
-    //$sql = "SELECT * FROM `$tbl_donation` where 1=1 and member_id = 1 ";
-    //echo $sql;
-    $result1 = mysqli_query($con,$sql);
-    $res = array();
-    while ($row1 = mysqli_fetch_array($result1)) {
-        $res[$row1['member_id']][] = $row1;
-    }
-    return $res;
-}
 
 function count_child($father_id) {
     global $con, $tbl_child;
@@ -259,7 +256,7 @@ function add_child($child) {
         //$fam_id=$child['fam_id'];
         $father_id = $child['father_id'];
         $c_name = $child['c_name'];
-        $c_dob = $child['dob']['year'] . "-" . $child['dob']['month'] . "-" . $child['dob']['date'];
+        $c_dob = $child['dob']['date'] . "-" . $child['dob']['month'] . "-" . $child['dob']['year'];
         //  $c_dob = $child['c_dob'];
         $c_gender = $child['c_gender'];
         $c_blood_group = $child['c_blood_group'];
@@ -280,22 +277,17 @@ function add_child($child) {
 }
 
 function add_donation($donation) {
-    global $con, $tbl_donation;
-    if (count($donation) && $donation['amount'] != '') {
-        $name = $donation['name'];
-        $reg_code = $donation['reg_code'];
-        $member_id = $donation['member_id'];
-        $type = $donation['type'];
-        $amount = $donation['amount'];
-        $paid_on = $donation['paid_on'];
-        $receipt_no = $donation['receipt_no'];
-        $sub_year = $donation['sub_year'];
-        $created_date = date('d-m-Y H:i:s');
-        $created_by = $_SESSION['id'];
-        $last_modified_date = date('d-m-Y H:i:s');
-        $last_modified_by = $_SESSION['id'];
-        $sql = "INSERT INTO `$tbl_donation`(`name`,`type`, `amount`, `paid_on`, `receipt_no`, `sub_year`,`member_id`,`reg_code`,`created_date`,`created_by`,`last_modified_date`,`last_modified_by`) 
-		             VALUES ('$name','$type', '$amount', '$paid_on', '$receipt_no', '$sub_year','$reg_code','$member_id','$created_date','$created_by','$last_modified_date','$last_modified_by')";
+    global $con, $tbl_donetion;
+    if (count($donation) && $donation['total_amount'] != '') {
+        $name = $donation['name'];  
+        
+        $total_amount = $donation['total_amount'];
+        $status= $donation['status'];
+        $book_no = $donation['book_no'];
+     $year=  $donation['year']['year'] ;
+        
+       $sql = "INSERT INTO `$tbl_donetion`(`name`,`year`,`total_amount`,`status`,`book_no`) 
+        VALUES ('$name','$year','$total_amount','$status','$book_no')";
         return mysqli_query($con, $sql);
     }
 }
@@ -313,7 +305,7 @@ function add_horoscope($horo) {
         $age = $horo['age'];
         //   $birth_date = $horo['birth_date'];
         //   $birth_time = $horo['birth_time'];
-        $birth_date = $horo['birth_date']['year'] . "-" . $horo['birth_date']['month'] . "-" . $horo['birth_date']['day'];
+        $birth_date = $horo['birth_date']['day'] . "-" . $horo['birth_date']['month'] . "-" . $horo['birth_date']['year'];
         $birth_time = $horo['birth_time']['hour'] . ":" . $horo['birth_time']['min'] . ":00";
         $birth_place = $horo['birth_place'];
         $raasi = $horo['raasi'];
@@ -390,10 +382,10 @@ function update_horoscope($id, $hdata) {
         $star = $hdata['star'];
         $laknam = $hdata['laknam'];
         $padham = $hdata['padham'];
-        $raaghu_kaedhu = $hdata['raaghu_kaedhu'];
+        $raaghu_kaedhu = $hdata['raaghu_kaedhu']??null ;
         $marital_status = $hdata['marital_status'];
         //    $status = $hdata['status'];
-        $sevvai = $hdata['sevvai'];
+        $sevvai = $hdata['sevvai']??null;
         $kulam = $hdata['kulam'];
         $m_kulam = $hdata['m_kulam'];
         $mm_kulam = $hdata['mm_kulam'];
@@ -492,6 +484,7 @@ function get_horoscope($id) {
     return $row;
 }
 
+
 function get_attachments($id) {
     global $con, $tbl_attachments;
     $result1 = mysqli_query($con,"SELECT * FROM `$tbl_attachments` WHERE `m_id`='$id' AND `type`='photo'");
@@ -574,7 +567,7 @@ function update_family($id, $data) {
         $email = $data['email'];
         $pudavai = $data['pudavai'];
         $mobile_no = $data['mobile_no'];
-        $permanent_address = $data['permanent_address'];
+        $permanent_address = $data['permanent_address'] ?? null;
         $current_address = $data['current_address'];
         $w_name = $data['w_name'];
         $w_dob = $data['w_dob'];
@@ -598,7 +591,7 @@ function update_family($id, $data) {
         $c_pincode = $data['c_pincode'];
         $state = $data['state'];
         $c_state = $data['c_state'];
-        $ic = $data['ic'];
+        $ic = $data['ic'] ?? null;
         //$_2000_bk_no = $data['_2000_bk_no'];
         //$_2000_rc_no = $data['_2000_rc_no'];
         $remarks = $data['remarks'];
@@ -641,25 +634,22 @@ function update_child($id, $cdata) {
 }
 
 function update_donation($id, $donation) {
-    global $con, $tbl_donation;
+    global $con, $tbl_donetion;
 
     if (count($donation) > 0) {
-        $name = $donation['name'];
-        $reg_code = $donation['reg_code'];
-        $member_id = $donation['member_id'];
-        $type = $donation['type'];
-        $amount = $donation['amount'];
-        $paid_on = $donation['paid_on'];
-        $receipt_no = $donation['receipt_no'];
-        $sub_year = $donation['sub_year'];
-        $last_modified_date = date('Y-m-d H:i:s');
-        $sql = "UPDATE `$tbl_donation` SET `name`='$name',`type`='$type',`amount`='$amount',`paid_on`='$paid_on',`receipt_no`='$receipt_no',`sub_year`='$sub_year',`member_id`='$reg_code',`reg_code`='$member_id', `last_modified_date`='$last_modified_date' WHERE `id` ='$id'";
+     $name = $donation['name'];  
+        $remaining_amount = $donation['remaining_amount'];
+        $total_amount = $donation['total_amount'];
+        $status= $donation['status'];
+        $book_no = $donation['book_no'];
+     $year=  $donation['year']['year'] ;
+        $sql = "UPDATE `$tbl_donetion` SET `name`='$name',`status`='$status',`total_amount`='$total_amount',`year`='$year',`book_no`='$book_no',`remaining_amount`='$remaining_amount' WHERE `id` ='$id'";
 
         return mysqli_query($con, $sql);
     }
     return false;
 }
-
+    
 function add_event($event) {
     global $con, $tbl_event;
     if (count($event) && $event['event_name'] != '') {
@@ -690,13 +680,37 @@ function add_book($book) {
     }
 }
 
-function list_event($event_id = '') {
+function list_event($event_id ) {
     global $con, $tbl_event;
 
     if ($event_id == '') {
         $sql = "SELECT * from  $tbl_event ";
     } else {
-        $sql = "SELECT * from  $tbl_event where event_id = $event_id";
+        $sql = "SELECT * from  $tbl_event where id = $event_id";
+    }
+
+    $result = mysqli_query($con, $sql);
+    return $result;
+}
+function list_donetion($id = '') {
+    global $con, $tbl_donetion;
+
+    if ($id == '') {
+        $sql = "SELECT * from  $tbl_donetion ";
+    } else {
+        $sql = "SELECT * from  $tbl_donetion where id = $id";
+    }
+
+    $result = mysqli_query($con, $sql);
+    return $result;
+}
+function list_donetion1($id = '') {
+    global $con, $tbl_donetion1;
+
+    if ($id == '') {
+        $sql = "SELECT * from  $tbl_donetion1 ";
+    } else {
+        $sql = "SELECT * from  $tbl_donetion1 where id = $id";
     }
 
     $result = mysqli_query($con, $sql);
@@ -709,7 +723,7 @@ function list_book($event_id = '') {
     if ($event_id == '') {
         $sql = "SELECT * from  $tbl_book ";
     } else {
-        $sql = "SELECT * from  $tbl_book where event_id  = $event_id ";
+        $sql = "SELECT * from  $tbl_book where id  = $event_id ";
     }
 
     $result = mysqli_query($con, $sql);
@@ -722,7 +736,7 @@ function list_receipt($book_id = '') {
     if ($book_id == '') {
         $sql = "SELECT * from  $tbl_receipt ";
     } else {
-        $sql = "SELECT * from  $tbl_receipt where book_id = $book_id";
+        $sql = "SELECT * from  $tbl_receipt where id = $book_id";
     }
 
     $result = mysqli_query($con, $sql);
@@ -731,21 +745,21 @@ function list_receipt($book_id = '') {
 
 function get_event($event_id) {
     global $con, $tbl_event;
-    $result = mysqli_query($con,"SELECT * FROM `$tbl_event` WHERE `event_id`='$event_id'");
+    $result = mysqli_query($con,"SELECT * FROM `$tbl_event` WHERE `id`='$event_id'");
     $row = mysqli_fetch_array($result);
     return $row;
 }
 
 function get_book($event_id) {
     global $con, $tbl_book;
-    $result = mysqli_query($con,"SELECT * FROM `$tbl_book` WHERE `event_id`='$event_id'");
+    $result = mysqli_query($con,"SELECT * FROM `$tbl_book` WHERE `id`='$event_id'");
     $row1 = mysqli_fetch_array($result);
     return $row1;
 }
 
 function get_receipt($book_id) {
     global $con, $tbl_receipt;
-    $result = mysqli_query($con,"SELECT * FROM `$tbl_receipt` WHERE `book_id`='$book_id'");
+    $result = mysqli_query($con,"SELECT * FROM `$tbl_receipt` WHERE `id`='$book_id'");
     $row = mysqli_fetch_array($result);
     return $row;
 }
@@ -760,7 +774,7 @@ function update_event($event_id, $edata) {
         //$no_of_books=$_POST['no_of_books'];
         //$amount=$_POST['amount'];
 
-        $sql = "UPDATE `$tbl_event` SET `event_name` = '$event_name',`date`= '$date', `location` = '$location' WHERE `event_id`='$event_id'";
+        $sql = "UPDATE `$tbl_event` SET `event_name` = '$event_name',`date`= '$date', `location` = '$location' WHERE `id`='$event_id'";
         return mysqli_query($con, $sql);
     }
 }
@@ -776,7 +790,7 @@ function update_book($event_id, $bdata) {
         $collected_amount = $bdata['collected_amount'];
         $issued_to = $bdata['issued_to'];
 
-        $sql = "UPDATE `$tbl_book` SET `book_no`='$book_no',`book_sno`='$book_sno',`book_eno`='$book_eno',`denom`='$denom', `collected_amount`='$collected_amount', `issued_to`='$issued_to' WHERE `event_id`='$event_id'";
+        $sql = "UPDATE `$tbl_book` SET `book_no`='$book_no',`book_sno`='$book_sno',`book_eno`='$book_eno',`denom`='$denom', `collected_amount`='$collected_amount', `issued_to`='$issued_to' WHERE `id`='$event_id'";
         return mysqli_query($con, $sql);
     }
 }
@@ -796,7 +810,7 @@ function update_receipt($id, $rdata) {
     }
 }
 
-function get_horo_by_member($member_id) {
+function get_horo_by_member($member_id='') {
 
     $cond = " AND ref_id = $member_id ";
     $res = get_horo_list($cond);
@@ -945,14 +959,23 @@ function get_users($id = '') {
 
 function get_user($id) {
     global $con, $tbl_users;
-    $result = mysqli_query($con, "SELECT * FROM `$tbl_users` WHERE `id`='$id'");
+    $sql = "SELECT * FROM `$tbl_users` WHERE `id`='$id'";
+    $result = mysqli_query($con, $sql);
+    $row = mysqli_fetch_array($result);
+    return $row;
+}
+function get_u($username) {
+    global $con, $tbl_users;
+    $sql = "SELECT * FROM `$tbl_users` WHERE `username`='$username'";
+    $result = mysqli_query($con, $sql);
     $row = mysqli_fetch_array($result);
     return $row;
 }
 
 function get_label($id) {
     global $con, $tbl_labels;
-    $result = mysqli_query($con,"SELECT * FROM `$tbl_labels` WHERE `id`='$id'");
+    $sql="SELECT * FROM `$tbl_labels` WHERE `id`='$id'";
+    $result = mysqli_query($con,$sql);
     $row = mysqli_fetch_array($result);
     return $row;
 }
@@ -994,14 +1017,15 @@ function update_users($id, $udata) {
 }
 
 function update_labels($id, $ldata) {
-
+    
     global $con, $tbl_labels;
     if (count($ldata) > 0) {
         $display_name = $ldata['display_name'];
         $slug = $ldata['slug'];
         $type = $ldata['type'];
         $category = $ldata['category'];
-        $parent_id = $ldata['parent_id'];
+        $parent_id = $ldata['parent_id'] ?? null;
+        if(isset($parent_id)){  $parent_id = $ldata['parent_id'];}else{$parent_id == 0;};
         $order = $ldata['order'];
 
         $sql = "UPDATE `$tbl_labels` SET `display_name` = '$display_name',`slug`= '$slug',  `type` = '$type',`category`= '$category', `parent_id`='$parent_id',`order` = '$order'  WHERE `id` = '$id'";
@@ -1021,7 +1045,7 @@ function add_user($udata) {
       //  $profile_id = $udata['profile_id'];
          $creation_date = date('d-m-Y h:i:s');
         //$creation_date = "now()";
-       $created_by = $_SESSION['id'];
+       $created_by = $_SESSION['id']??'';
   $sql = "INSERT INTO `$tbl_users`(`username`, `email`, `password`, `role`, `creation_date`, `created_by`,`mobile_no`) VALUES ('$username', '$email', '$password', '$role', '$creation_date', '$created_by','$mobile_no')";
 //echo $sql;die;
         return mysqli_query($con, $sql);
@@ -1589,6 +1613,90 @@ function display_year($name = "birth_date", $default = '', $type = "") {
     <?php
 }
 
+function display_date1($name = "year", $default = "") {
+
+    //here $default is a date value.. we extract the day part here
+    $date = date("m", strtotime($default));
+
+    echo "<select name='$name'  class='form-control' >";
+    echo "<option value='' >-Day-</option>";
+
+    $sel = '';
+    for ($i = 1; $i <= 31; $i++) {
+        $i1 = sprintf("%02d", $i);
+
+        if ($i1 == $date)
+            $sel = "selected";
+        else
+            $sel = '  ';
+
+
+        echo "<option value='$i1'  $sel >$i1</option>";
+    }
+    echo " </select>";
+}
+
+function display_month1($name = "year", $default = '') {
+
+    global $month;
+
+    if ($default != '')
+        $def_month = date('m', strtotime($default));
+    else
+        $def_month = '';
+    ?>
+    <select name="<?php echo $name ?>"  class="form-control" >
+        <option value="">-Month- </option>
+        <?php
+        $sel = '';
+        foreach ($month as $k => $v) {
+            if ($k == $def_month)
+                $sel = ' selected ';
+            else
+                $sel = '  ';
+            ?>
+            <option value="<?php echo $k ?>"   <?php echo $sel ?> ><?php echo $v ?></option>
+            <?php
+        }
+        ?>
+
+    </select>
+
+    <?php
+}
+
+function display_year1($name = "year", $default = '', $type = "") {
+    $cur_year = date('Y');
+    $def_year = date('Y', strtotime($default));
+    if ($type == 'horo') {
+        $end_year = $cur_year - 15;
+        $start_year = $end_year - 25;
+    } else {
+        $end_year = $cur_year;
+        $start_year = $end_year - 100;
+    }
+    ?>
+    <select name="<?php echo $name ?>"  class="form-control" >
+        <option value='' >-Year-</option>
+        <?php
+        $sel = '';
+        for ($i = $end_year; $i >= $start_year; $i--) {
+            if ($i == $def_year)
+                $sel = ' selected ';
+            else
+                $sel = '  ';
+            ?>
+
+            <option value="<?php echo $i ?>"  <?php echo $sel ?>><?php echo $i ?></option>
+
+            <?php
+        }
+        ?>
+
+    </select>
+    <?php
+}
+
 function display_raasi($name = "raasi", $default = '', $style = '') {
 
     global $raasi;
@@ -1639,8 +1747,11 @@ function display_star_checkbox($name = "star", $default = array()) {
         foreach ($stars as $k => $v) {
             ?>
             <li class="list-group-item">
+
                 <input type="checkbox" name="<?php echo $name . '[' . $k . ']' ?>"  <?php if (isset($default[$k])) echo "checked" ?>> 
-                <label >   <?php echo $v ?> </label>
+                
+               
+                <label ><?php echo $v ?> </label>
             </li>    
 
             <?php
@@ -1738,7 +1849,9 @@ function display_padham($name = "padham", $default = '') {
 function display_hour($name = "birth_time", $default = '') {
     $hour = 0;
     $hr = date("H", strtotime($default));
+        echo 'Hour:';
     ?>
+
     <select name="<?php echo $name ?>"  class="form-control" >
         <option value='' >-hh-</option>
         <?php
@@ -1762,6 +1875,7 @@ function display_hour($name = "birth_time", $default = '') {
     function display_minute($name = "birth_time", $default = '') {
         $minute = 00;
         $min = date("i", strtotime($default));
+         echo 'minute:';
         ?>
         <select name="<?php echo $name ?>"  class="form-control" >
             <option value='' >-mm-</option>
@@ -1809,7 +1923,7 @@ function display_hour($name = "birth_time", $default = '') {
 
         function display_raghu_kedhu_checkbox($name = 'raaghu_kaedhu', $default = '', $style = '') {
             ?>
-            <input type="checkbox" name="<?php echo $name ?>" value="" <?php echo ($default > 0) ? " checked " : "" ?> style="<?php echo $style ?>"> 
+            <input type="checkbox" class="col-sm-3" name="<?php echo $name ?>" value="" <?php echo ($default > 0) ? " checked " : "" ?> style="<?php echo $style ?>"> 
             <?php
         }
 
@@ -1836,7 +1950,7 @@ function display_hour($name = "birth_time", $default = '') {
 
         function display_sevvai_checkbox($name = 'sevvai', $default = '', $style = '') {
             ?>
-            <input type="checkbox" name="<?php echo $name ?>" value="" <?php echo ($default > 0) ? " checked " : "" ?> style="<?php echo $style ?>"> 
+            <input type="checkbox" class="col-sm-3" name="<?php echo $name ?>" value="" <?php echo ($default > 0) ? " checked " : "" ?> style="<?php echo $style ?>"> 
             <?php
         }
 
@@ -1852,7 +1966,10 @@ function display_hour($name = "birth_time", $default = '') {
         function get_kulam($k) {
             //global $kulam;
             $kulam = get_label($k);
-            return $kulam['display_name'];
+            if($kulam){
+                return $kulam['display_name'];
+            }
+           
             //return $kulam[$k];
         }
 
@@ -1880,7 +1997,7 @@ function display_hour($name = "birth_time", $default = '') {
 
         function get_workplace($w) {
             $workplace = get_label($w);
-            return $workplace['display_name'];
+           return isset($workplace['display_name']) ? $workplace['display_name'] : null;
         }
 
         function get_qualification($q) {
@@ -1890,7 +2007,7 @@ function display_hour($name = "birth_time", $default = '') {
 
         function get_blood_group($b) {
             $blood_group = get_label($b);
-            return $blood_group['display_name'];
+            return $blood_group['display_name'] ?? null;
         }
 
         function get_colour($c) {
@@ -1930,7 +2047,7 @@ function display_hour($name = "birth_time", $default = '') {
             $kattalai = get_label($k_id);
             //get maximum number used for mem id in particular kattalai
             $mem_no = 0;
-            $area_code = $kattalai['order'];
+            $area_code = $kattalai['order'] ?? null;
 
             $max_no = get_max_mem_no($area_code);
             $mem_id = $area_code . sprintf("%03d", $max_no);
@@ -1942,7 +2059,7 @@ function display_hour($name = "birth_time", $default = '') {
 
 
             //$mem_id = $area_code . 
-            var_dump($kattalai['order']);
+            var_dump($kattalai['order']??null);
         }
 
         function generate_matri_no($m_id) {

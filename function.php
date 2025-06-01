@@ -25,7 +25,7 @@ function connectdb() {
     //connect only if the $con variable is false..  if it is true, it means already connection established
     if ($con == false) {
 
-      $con = new mysqli('localhost', 'root', '', 'kovilnew');
+      $con = new mysqli($db_host, $db_user, $db_pass, $db_name);
      
         if (!$con) {
             die('Could not connect ' );

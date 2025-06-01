@@ -3,9 +3,9 @@ global $db_host, $db_name, $db_user, $db_pass, $con,$path;
 
 
 $db_host = 'localhost';
-$db_name = 'kovilnew';
-$db_user = 'root';
-$db_pass = '';  
+$db_name = 'career_kovil';
+$db_user = 'career_kovil';
+$db_pass = 'Kovil123';  
 //$con = mysqli_connect($db_host, $db_user, $db_pass);
 
 

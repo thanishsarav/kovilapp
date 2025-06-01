@@ -1,7 +1,7 @@
 <?php include('../header.php');
 $event = $_GET['event_id'];
 $row = get_donation($event);
-$result = list_donetion1();
+$result = list_donetion1($event);
 
 ?>
 
@@ -21,7 +21,7 @@ $result = list_donetion1();
 </div>
 <script>
     function adddo() {
-        url = "adddo_1.php";
+        url = "addo_1.php?event_id=<?php echo$event ?>";
         title = "popup";
         var newWindow = window.open(url, title, 'scrollbars=yes, width=1000 height=500');
     }
@@ -63,7 +63,7 @@ $result = list_donetion1();
                                     ?>
                                     <tr>
                                         <td class="col-md-2"><?php echo $row['id'] ?></td>
-                                        <td class="col-md-1"><?php echo $row['member_name'] ?></td>
+                                        <td class="col-md-1"><?php echo $row['member_no'] ?></td>
                                         <td class="col-md-1"><?php echo $row['date'] ?></td>
                                         <td class="col-md-1"><?php echo $row['recept_no'] ?></td>
                                         <td class="col-md-2"><?php echo $row['book_no'] ?> </td>

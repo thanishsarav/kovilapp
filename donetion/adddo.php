@@ -52,14 +52,7 @@ if (count($_POST) && $_POST['name'] != '') {
                             placeholder="status">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-4 control-label">No of books</label>
-
-                    <div class="col-sm-7">
-                        <input type="text" class="form-control" id="inputPassword3" name="book_no"
-                            placeholder="Number of books">
-                    </div>
-                </div>
+                
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-4 control-label">Amount</label>
 

@@ -283,11 +283,27 @@ function add_donation($donation) {
         
         $total_amount = $donation['total_amount'];
         $status= $donation['status'];
-        $book_no = $donation['book_no'];
+       
      $year=  $donation['year']['year'] ;
         
-       $sql = "INSERT INTO `$tbl_donetion`(`name`,`year`,`total_amount`,`status`,`book_no`) 
-        VALUES ('$name','$year','$total_amount','$status','$book_no')";
+       $sql = "INSERT INTO `$tbl_donetion`(`name`,`year`,`total_amount`,`status`) 
+        VALUES ('$name','$year','$total_amount','$status')";
+        return mysqli_query($con, $sql);
+    }
+}
+function add_donation1($donation) {
+    global $con, $tbl_donetion1;
+    if (count($donation) && $donation['amount'] != '') {
+        $member_no = $donation['member_no'];          
+        $amount = $donation['amount'];
+        $recept_no= $donation['recept_no'];
+        $book_no= $donation['book_no'];
+        $event=$donation['event_id'];
+         $date= $donation['date']['date'] . "-" . $donation['date']['month'] . "-" . $donation['date']['year'];   
+       
+
+       $sql = "INSERT INTO `$tbl_donetion1`(`member_no`,`date`,`recept_no`,`book_no`,`amount`,`event_id`) 
+        VALUES ('$member_no','$date','$recept_no','$book_no','$amount','$event')";
         return mysqli_query($con, $sql);
     }
 }
@@ -709,8 +725,10 @@ function list_donetion1($id = '') {
 
     if ($id == '') {
         $sql = "SELECT * from  $tbl_donetion1 ";
+        die;
     } else {
-        $sql = "SELECT * from  $tbl_donetion1 where id = $id";
+        $sql = "SELECT * from  $tbl_donetion1 where event_id= $id";
+        
     }
 
     $result = mysqli_query($con, $sql);

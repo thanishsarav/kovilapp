@@ -234,7 +234,7 @@ check_login();
 
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-left  mailbox " aria-labelledby="0"
-                                        style="max-height: 94px !important;border:2px inset #095A51">
+                                        style="max-height: 50px !important;border:2px inset #095A51">
 
                                         <ul class="list-style-none">
 
@@ -249,14 +249,7 @@ check_login();
 
                                                         </div>
                                                     </a>
-                                                    <a  href="<?php echo $path ?>/donetion/eventlist.php" 
-                                                        class="message-item">
-
-                                                        <div class="mail-contnet">
-                                                            <h5 class="message-title">Eventlist</h5>
-
-                                                        </div>
-                                                    </a>
+                                                   
                                                     
 
 
